@@ -1,66 +1,1309 @@
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#09090d">
-  <meta name="description" content="Apps, experiments and projects by an independent app developer.">
-  <title>NEON LABS — App Developer Portfolio</title>
-  <link rel="manifest" href="manifest.json">
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#08080c">
+  <meta name="description" content="NEON LABS — Gaming apps, mobile tools and creative digital projects.">
+
+  <title>NEON LABS | Digital Playground</title>
+
+  <style>
+    :root {
+      --bg: #08080c;
+      --panel: #111117;
+      --red: #ff304f;
+      --text: #f5f5fa;
+      --muted: #a3a3b2;
+      --border: rgba(255,255,255,.09);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    button:focus-visible,
+    a:focus-visible {
+      outline: 2px solid var(--red);
+      outline-offset: 4px;
+    }
+
+    .container {
+      width: min(1120px, 90%);
+      margin: auto;
+    }
+
+    .glow {
+      position: fixed;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      filter: blur(110px);
+      opacity: .15;
+      pointer-events: none;
+      z-index: -1;
+      background: var(--red);
+    }
+
+    .glow.one {
+      top: 10%;
+      left: -200px;
+    }
+
+    .glow.two {
+      right: -200px;
+      top: 55%;
+    }
+
+    /* NAVIGATION */
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(8,8,12,.85);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .navbar {
+      min-height: 76px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 19px;
+      font-weight: 900;
+      letter-spacing: 1px;
+    }
+
+    .logo-icon {
+      width: 39px;
+      height: 39px;
+      display: grid;
+      place-items: center;
+      background: var(--red);
+      border-radius: 12px;
+      color: white;
+      box-shadow: 0 0 25px #ff304f55;
+      font-size: 22px;
+    }
+
+    .logo span:last-child {
+      color: var(--red);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 27px;
+    }
+
+    nav a {
+      color: #c5c5d0;
+      font-size: 14px;
+      transition: .25s;
+    }
+
+    nav a:hover {
+      color: var(--red);
+    }
+
+    .nav-contact {
+      padding: 10px 17px;
+      border: 1px solid var(--red);
+      border-radius: 9px;
+      color: white;
+    }
+
+    .menu-btn {
+      display: none;
+      background: transparent;
+      color: white;
+      border: 1px solid var(--border);
+      padding: 8px 12px;
+      border-radius: 9px;
+      cursor: pointer;
+    }
+
+    /* HERO */
+
+    .hero {
+      min-height: 650px;
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      align-items: center;
+      gap: 40px;
+      padding-top: 75px;
+      padding-bottom: 75px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 8px 13px;
+      border-radius: 30px;
+      border: 1px solid #ff304f50;
+      color: #ff9aaa;
+      background: #ff304f0c;
+      font-size: 11px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      margin-bottom: 25px;
+    }
+
+    .live-dot {
+      width: 7px;
+      height: 7px;
+      background: var(--red);
+      border-radius: 50%;
+      box-shadow: 0 0 12px var(--red);
+      animation: blink 1.4s infinite;
+    }
+
+    h1 {
+      font-size: clamp(43px, 6.3vw, 78px);
+      line-height: 1.04;
+      letter-spacing: -3px;
+      font-weight: 900;
+    }
+
+    .red {
+      color: var(--red);
+    }
+
+    .gradient {
+      background: linear-gradient(100deg, #fff, #ff304f 75%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      max-width: 550px;
+      color: var(--muted);
+      margin-top: 24px;
+      font-size: 16px;
+    }
+
+    .actions {
+      display: flex;
+      gap: 13px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border-radius: 10px;
+      padding: 14px 21px;
+      font-size: 14px;
+      font-weight: bold;
+      transition: transform .25s, box-shadow .25s;
+    }
+
+    .btn:hover {
+      transform: translateY(-4px);
+    }
+
+    .btn-primary {
+      color: white;
+      background: var(--red);
+      box-shadow: 0 8px 28px #ff304f30;
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 10px 35px #ff304f55;
+    }
+
+    .btn-secondary {
+      border: 1px solid var(--border);
+      background: #ffffff05;
+    }
+
+    .stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      margin-top: 43px;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 25px;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 10px;
+      letter-spacing: 1.5px;
+    }
+
+    /* ANIMATED HERO ART */
+
+    .hero-art {
+      min-height: 430px;
+      position: relative;
+      display: grid;
+      place-items: center;
+      isolation: isolate;
+    }
+
+    .orbit {
+      position: absolute;
+      width: 350px;
+      height: 350px;
+      border: 1px solid #ff304f38;
+      border-radius: 50%;
+      animation: rotate 18s linear infinite;
+    }
+
+    .orbit::before {
+      content: "";
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--red);
+      top: 45px;
+      left: 36px;
+      box-shadow: 0 0 20px var(--red);
+    }
+
+    .orbit.second {
+      width: 280px;
+      height: 280px;
+      border-style: dashed;
+      animation-direction: reverse;
+      animation-duration: 25s;
+    }
+
+    .device {
+      position: relative;
+      width: 235px;
+      min-height: 335px;
+      border: 1px solid #ff304f75;
+      border-radius: 27px;
+      padding: 26px 20px;
+      background: linear-gradient(145deg, #1a1017, #0c0c12 70%);
+      box-shadow: 0 0 70px #ff304f19, inset 0 0 35px #ff304f08;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .device-notch {
+      width: 70px;
+      height: 7px;
+      border-radius: 20px;
+      background: #39303a;
+      margin: -12px auto 24px;
+    }
+
+    .device-label {
+      color: #a8a8b5;
+      font-size: 9px;
+      letter-spacing: 2px;
+    }
+
+    .device-title {
+      margin-top: 18px;
+      font-size: 28px;
+      line-height: 1.15;
+      font-weight: 900;
+    }
+
+    .app-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 25px;
+    }
+
+    .app-tile {
+      min-height: 75px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      background: #ffffff05;
+    }
+
+    .app-tile b {
+      font-size: 23px;
+      color: var(--red);
+    }
+
+    .app-tile small {
+      color: #b8b8c5;
+      font-size: 9px;
+      letter-spacing: 1px;
+    }
+
+    .float-tag {
+      position: absolute;
+      padding: 11px 14px;
+      border: 1px solid #ff304f50;
+      background: #151017;
+      border-radius: 10px;
+      color: #ffc0ca;
+      font-size: 10px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      box-shadow: 0 10px 35px #0008;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .tag-left {
+      left: 0;
+      top: 25%;
+    }
+
+    .tag-right {
+      right: 0;
+      bottom: 23%;
+      animation-delay: -1.5s;
+    }
+
+    /* COMMON SECTIONS */
+
+    section.content-section {
+      padding: 95px 0;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 25px;
+      margin-bottom: 35px;
+    }
+
+    .eyebrow {
+      color: var(--red);
+      font-size: 11px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+    }
+
+    h2 {
+      font-size: clamp(32px, 4vw, 48px);
+      line-height: 1.15;
+      letter-spacing: -1.5px;
+    }
+
+    .section-heading p {
+      max-width: 400px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* PROJECTS */
+
+    .filters {
+      display: flex;
+      gap: 9px;
+      flex-wrap: wrap;
+      margin-bottom: 25px;
+    }
+
+    .filter {
+      padding: 9px 16px;
+      color: #b8b8c5;
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      background: transparent;
+      cursor: pointer;
+      font-size: 12px;
+      transition: .25s;
+    }
+
+    .filter.active,
+    .filter:hover {
+      background: var(--red);
+      border-color: var(--red);
+      color: white;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .project-card {
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 17px;
+      background: var(--panel);
+      transition: transform .3s, border-color .3s;
+      animation: appear .5s ease both;
+    }
+
+    .project-card:hover {
+      transform: translateY(-7px);
+      border-color: #ff304f70;
+    }
+
+    .project-cover {
+      min-height: 185px;
+      display: grid;
+      place-items: center;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 50% 50%, #ff304f30, transparent 55%),
+        linear-gradient(135deg, #1c1018, #101016);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .project-cover::before,
+    .project-cover::after {
+      content: "";
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      border: 1px solid #ff304f25;
+      border-radius: 50%;
+    }
+
+    .project-cover::after {
+      width: 145px;
+      height: 145px;
+    }
+
+    .project-icon {
+      position: relative;
+      z-index: 1;
+      width: 85px;
+      height: 85px;
+      display: grid;
+      place-items: center;
+      border-radius: 23px;
+      border: 1px solid #ff526a70;
+      background: #1b1019;
+      color: var(--red);
+      font-size: 35px;
+      font-weight: 900;
+      box-shadow: 0 0 45px #ff304f22;
+    }
+
+    .project-info {
+      padding: 23px;
+    }
+
+    .project-type {
+      color: var(--red);
+      font-size: 10px;
+      font-weight: bold;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .project-info h3 {
+      margin-top: 8px;
+      font-size: 21px;
+    }
+
+    .project-info p {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .project-link {
+      display: inline-block;
+      margin-top: 18px;
+      color: #ff8a9b;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .project-link:hover {
+      color: white;
+    }
+
+    .hint {
+      color: #858593;
+      font-size: 12px;
+      margin-top: 22px;
+    }
+
+    /* PROCESS */
+
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .process-card {
+      padding: 25px;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      background: linear-gradient(145deg, #ffffff08, #ffffff02);
+    }
+
+    .step {
+      color: var(--red);
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+
+    .process-card h3 {
+      margin-top: 15px;
+      font-size: 18px;
+    }
+
+    .process-card p {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* ABOUT */
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: .8fr 1.2fr;
+      align-items: center;
+      gap: 65px;
+    }
+
+    .about-art {
+      min-height: 300px;
+      display: grid;
+      place-items: center;
+      border: 1px solid #ff304f35;
+      border-radius: 22px;
+      background:
+        radial-gradient(circle, #ff304f24, transparent 60%),
+        #111117;
+      overflow: hidden;
+    }
+
+    .about-symbol {
+      font-size: 110px;
+      font-weight: 900;
+      color: var(--red);
+      text-shadow: 0 0 60px #ff304f55;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .about-copy p {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .text-link {
+      display: inline-block;
+      margin-top: 22px;
+      color: #ff8395;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    /* SKILLS */
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .skill {
+      padding: 13px 17px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #ffffff04;
+      color: #d6d6e0;
+      font-size: 13px;
+      transition: .25s;
+    }
+
+    .skill:hover {
+      border-color: var(--red);
+      transform: translateY(-3px);
+    }
+
+    /* CONTACT */
+
+    .contact-box {
+      position: relative;
+      overflow: hidden;
+      padding: 65px 30px;
+      text-align: center;
+      border: 1px solid #ff304f45;
+      border-radius: 22px;
+      background:
+        radial-gradient(ellipse at top, #ff304f1b, transparent 60%),
+        #111117;
+    }
+
+    .contact-box p {
+      max-width: 530px;
+      margin: 18px auto 25px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .contact-box .actions {
+      justify-content: center;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 25px 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    footer p,
+    footer a {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    /* REVEAL ANIMATION */
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(25px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+
+    @keyframes rotate {
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes blink {
+      50% { opacity: .35; }
+    }
+
+    @keyframes appear {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* MOBILE RESPONSIVE */
+
+    @media (max-width: 800px) {
+      .menu-btn {
+        display: block;
+      }
+
+      nav {
+        display: none;
+        position: absolute;
+        top: 76px;
+        left: 0;
+        right: 0;
+        padding: 20px 5%;
+        background: #0c0c12;
+        border-bottom: 1px solid var(--border);
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+      }
+
+      nav.open {
+        display: flex;
+      }
+
+      nav a {
+        padding: 13px 0;
+      }
+
+      .nav-contact {
+        text-align: center;
+        margin-top: 8px;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 65px;
+        gap: 15px;
+      }
+
+      .hero-copy {
+        text-align: center;
+      }
+
+      .hero p {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .actions,
+      .stats {
+        justify-content: center;
+      }
+
+      .hero-art {
+        min-height: 390px;
+      }
+
+      .section-heading {
+        display: block;
+      }
+
+      .section-heading p {
+        margin-top: 15px;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .about-art {
+        min-height: 240px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      h1 {
+        letter-spacing: -2px;
+      }
+
+      section.content-section {
+        padding: 65px 0;
+      }
+
+      .project-grid,
+      .process-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .project-cover {
+        min-height: 165px;
+      }
+
+      .orbit {
+        width: 290px;
+        height: 290px;
+      }
+
+      .orbit.second {
+        width: 235px;
+        height: 235px;
+      }
+
+      .device {
+        width: 220px;
+      }
+
+      .tag-left {
+        left: -3px;
+      }
+
+      .tag-right {
+        right: -3px;
+      }
+
+      .stats {
+        gap: 20px;
+      }
+
+      .stat strong {
+        font-size: 22px;
+      }
+
+      .contact-box {
+        padding: 45px 18px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
 </head>
+
 <body>
-  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
-  <header class="topbar">
-    <a class="brand" href="#home" aria-label="Home"><span class="brand-mark">N<span>✦</span></span><span id="brandName">NEON LABS</span></a>
-    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
-    <nav id="nav">
-      <a href="#projects">Projects</a><a href="#about">About</a><a href="#skills">Skills</a><a href="#contact" class="nav-cta">Contact ↗</a>
-    </nav>
+  <div class="glow one"></div>
+  <div class="glow two"></div>
+
+  <!-- NAVBAR -->
+  <header>
+    <div class="container navbar">
+      <a class="logo" href="#home">
+        <span class="logo-icon">N</span>
+        <span>NEON <span>LABS</span></span>
+      </a>
+
+      <button class="menu-btn" id="menuBtn"
+        aria-label="Open navigation"
+        aria-controls="nav"
+        aria-expanded="false">
+        ☰
+      </button>
+
+      <nav id="nav">
+        <a href="#projects">Projects</a>
+        <a href="#process">Process</a>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact" class="nav-contact">Contact ↗</a>
+      </nav>
+    </div>
   </header>
 
   <main>
-    <section class="hero section" id="home">
-      <div class="hero-copy">
-        <div class="eyebrow"><span class="pulse"></span> INDEPENDENT APP DEVELOPER</div>
-        <h1>BUILDING<br>APPS THAT<br><span class="gradient-text">STAND OUT.</span></h1>
-        <p class="hero-description">I turn ideas into useful digital experiences — from mobile apps and gaming tools to practical everyday utilities.</p>
-        <div class="hero-actions"><a class="button primary" href="#projects">Explore my work <span>↘</span></a><a class="button secondary" href="#contact">Let's connect</a></div>
-        <div class="hero-stats"><div><strong id="projectCount">04</strong><span>PROJECTS</span></div><i></i><div><strong>24/7</strong><span>IDEAS IN PROGRESS</span></div><i></i><div><strong>∞</strong><span>ROOM TO BUILD</span></div></div>
+    <!-- HERO -->
+    <section class="container hero" id="home">
+      <div class="hero-copy reveal">
+        <div class="badge">
+          <span class="live-dot"></span>
+          INDEPENDENT APP DEVELOPER
+        </div>
+
+        <h1>
+          IDEAS INTO<br>
+          REALITY<span class="red">.</span><br>
+          <span class="gradient">BUILT DIFFERENT.</span>
+        </h1>
+
+        <p>
+          Welcome to my digital playground. I explore app ideas,
+          gaming-inspired interfaces and useful tools that turn
+          creative thinking into digital experiences.
+        </p>
+
+        <div class="actions">
+          <a href="#projects" class="btn btn-primary">
+            Explore Projects ↘
+          </a>
+          <a href="#contact" class="btn btn-secondary">
+            Let's Connect
+          </a>
+        </div>
+
+        <div class="stats">
+          <div class="stat">
+            <strong id="projectCount">04</strong>
+            <span>PROJECTS</span>
+          </div>
+          <div class="stat">
+            <strong>24/7</strong>
+            <span>IDEAS IN PROGRESS</span>
+          </div>
+          <div class="stat">
+            <strong>∞</strong>
+            <span>ROOM TO BUILD</span>
+          </div>
+        </div>
       </div>
-      <div class="hero-art" aria-label="Decorative neon app illustration">
-        <div class="orbit orbit-a"></div><div class="orbit orbit-b"></div>
-        <div class="device"><div class="device-notch"></div><div class="screen-top"><span>MY WORKSPACE</span><span class="tiny-dot"></span></div><div class="screen-title">Ideas into<br><b>reality.</b></div>
-          <div class="app-mini-grid"><div class="mini-app red"><span>✦</span><small>GAMING</small></div><div class="mini-app purple"><span>⌘</span><small>TOOLS</small></div><div class="mini-app orange"><span>◈</span><small>UTILITY</small></div><div class="mini-app green"><span>↗</span><small>WEB</small></div></div>
-          <div class="screen-footer"><span class="tiny-dot"></span> CREATING SOMETHING NEW</div>
-        </div><div class="float-tag tag-left">✦ CREATIVE BUILDER</div><div class="float-tag tag-right">APP / WEB / IDEAS</div>
+
+      <div class="hero-art reveal">
+        <div class="orbit"></div>
+        <div class="orbit second"></div>
+
+        <div class="device">
+          <div class="device-notch"></div>
+          <div class="device-label">MY WORKSPACE / 001</div>
+
+          <div class="device-title">
+            Ideas into<br>
+            <span class="red">reality.</span>
+          </div>
+
+          <div class="app-grid">
+            <div class="app-tile">
+              <b>✦</b>
+              <small>GAMING</small>
+            </div>
+            <div class="app-tile">
+              <b>⌘</b>
+              <small>TOOLS</small>
+            </div>
+            <div class="app-tile">
+              <b>◈</b>
+              <small>UTILITY</small>
+            </div>
+            <div class="app-tile">
+              <b>↗</b>
+              <small>WEB</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="float-tag tag-left">✦ CREATIVE BUILDER</div>
+        <div class="float-tag tag-right">APP / WEB / IDEAS</div>
       </div>
     </section>
 
-    <section class="section projects-section" id="projects">
-      <div class="section-heading"><div><div class="eyebrow">SELECTED WORK</div><h2>Projects<span class="red-dot">.</span></h2></div><p>A growing collection of apps, experiments and useful tools.</p></div>
-      <div class="filters" id="filters">
-        <button class="filter active" data-filter="all">All projects</button><button class="filter" data-filter="Android">Android</button><button class="filter" data-filter="Gaming">Gaming</button><button class="filter" data-filter="Utility">Utility</button><button class="filter" data-filter="Web">Web</button>
+    <!-- PROJECTS -->
+    <section class="container content-section" id="projects">
+      <div class="section-heading reveal">
+        <div>
+          <div class="eyebrow">SELECTED WORK / PROJECT ARCHIVE</div>
+          <h2>Made in the lab<span class="red">.</span></h2>
+        </div>
+        <p>
+          Explore app concepts, gaming projects and practical tools.
+          Use the filters to find a project category.
+        </p>
       </div>
+
+      <div class="filters reveal" id="filters">
+        <button class="filter active" data-filter="all" aria-pressed="true">All Projects</button>
+        <button class="filter" data-filter="Android" aria-pressed="false">Android</button>
+        <button class="filter" data-filter="Gaming" aria-pressed="false">Gaming</button>
+        <button class="filter" data-filter="Utility" aria-pressed="false">Utility</button>
+        <button class="filter" data-filter="Web" aria-pressed="false">Web</button>
+      </div>
+
       <div class="project-grid" id="projectGrid"></div>
-      <p class="edit-hint">Tip: edit <code>projects</code> in <code>app.js</code> to add your own apps and real download links.</p>
+
+      <p class="hint">
+        Tip: Replace demo project details and links with your real work before publishing.
+      </p>
     </section>
 
-    <section class="section about-section" id="about">
-      <div class="about-visual"><div class="about-card"><div class="about-symbol">N<span>✦</span></div><div class="scan-line"></div><div class="about-caption">CURIOSITY → CREATION</div></div></div>
-      <div class="about-copy"><div class="eyebrow">A LITTLE ABOUT ME</div><h2>Curious mind.<br><span class="gradient-text">Builder mindset.</span></h2><p>I enjoy exploring ideas, designing interfaces and building apps that solve real problems or make digital life more fun. This portfolio is my home for sharing what I create and what I learn along the way.</p><p class="muted">Replace this paragraph with your own story, experience and goals.</p><a class="text-link" href="#contact">Have an idea? Let's talk <span>↗</span></a></div>
+    <!-- PROCESS -->
+    <section class="container content-section" id="process">
+      <div class="section-heading reveal">
+        <div>
+          <div class="eyebrow">FROM THOUGHT TO LAUNCH</div>
+          <h2>How I build<span class="red">.</span></h2>
+        </div>
+        <p>
+          A simple process for turning an idea into a useful,
+          polished digital experience.
+        </p>
+      </div>
+
+      <div class="process-grid">
+        <article class="process-card reveal">
+          <span class="step">STEP / 01</span>
+          <h3>Explore the idea</h3>
+          <p>Understand the problem, define the goal and identify who the project is for.</p>
+        </article>
+
+        <article class="process-card reveal">
+          <span class="step">STEP / 02</span>
+          <h3>Design the experience</h3>
+          <p>Create a clear, responsive interface with useful features and thoughtful details.</p>
+        </article>
+
+        <article class="process-card reveal">
+          <span class="step">STEP / 03</span>
+          <h3>Build and improve</h3>
+          <p>Test on different screens, fix problems and keep improving the experience.</p>
+        </article>
+      </div>
     </section>
 
-    <section class="section skills-section" id="skills">
-      <div class="section-heading"><div><div class="eyebrow">MY TOOLKIT</div><h2>Skills & focus<span class="red-dot">.</span></h2></div><p>Update these tags to match the tools and technologies you actually use.</p></div>
-      <div class="skill-list"><span>Android apps</span><span>HTML & CSS</span><span>JavaScript</span><span>UI / UX design</span><span>Python</span><span>Firebase</span><span>API integration</span><span>Responsive web</span></div>
+    <!-- ABOUT -->
+    <section class="container content-section" id="about">
+      <div class="about-grid">
+        <div class="about-art reveal">
+          <div class="about-symbol">N✦</div>
+        </div>
+
+        <div class="about-copy reveal">
+          <div class="eyebrow">BEHIND THE PIXELS</div>
+          <h2>Curious mind.<br><span class="gradient">Builder mindset.</span></h2>
+
+          <p>
+            I enjoy exploring creative ideas, designing interfaces
+            and building digital projects that solve problems or
+            make technology more fun to use.
+          </p>
+
+          <p>
+            This portfolio is where I share my projects, experiments
+            and progress as I continue learning and building.
+          </p>
+
+          <a href="#contact" class="text-link">Have an idea? Let's talk ↗</a>
+        </div>
+      </div>
     </section>
 
-    <section class="section contact-section" id="contact">
-      <div class="contact-box"><div class="eyebrow">HAVE A PROJECT IN MIND?</div><h2>Let's make<br><span class="gradient-text">something awesome.</span></h2><p>For collaborations, feedback or just to connect, reach out using the links below.</p><div class="contact-links" id="contactLinks"></div><span class="contact-note">Add your real contact links in <code>app.js</code> before publishing.</span></div>
+    <!-- SKILLS -->
+    <section class="container content-section" id="skills">
+      <div class="section-heading reveal">
+        <div>
+          <div class="eyebrow">TOOLS IN THE LOADOUT</div>
+          <h2>Skills & focus<span class="red">.</span></h2>
+        </div>
+        <p>Update this section as your skills and experience grow.</p>
+      </div>
+
+      <div class="skills reveal">
+        <span class="skill">HTML & CSS</span>
+        <span class="skill">JavaScript</span>
+        <span class="skill">Android App Concepts</span>
+        <span class="skill">UI / UX Design</span>
+        <span class="skill">Python</span>
+        <span class="skill">Firebase</span>
+        <span class="skill">API Integration</span>
+        <span class="skill">Responsive Web Design</span>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="container content-section" id="contact">
+      <div class="contact-box reveal">
+        <div class="eyebrow">OPEN THE NEXT TAB</div>
+        <h2>Got an idea?<br><span class="gradient">Let's build something.</span></h2>
+
+        <p>
+          Have feedback, a project idea or want to connect?
+          Reach out through your preferred contact link.
+        </p>
+
+        <div class="actions">
+          <!-- Replace these example links with your real links -->
+          <a class="btn btn-primary" href="mailto:your-email@example.com">
+            Email Me ↗
+          </a>
+          <a class="btn btn-secondary" href="#projects">
+            View My Work
+          </a>
+        </div>
+      </div>
     </section>
   </main>
-  <footer><a class="brand" href="#home"><span class="brand-mark">N<span>✦</span></span><span id="footerBrand">NEON LABS</span></a><span>© <span id="year"></span> <span id="footerName">NEON LABS</span>. Built with curiosity.</span><a href="#home" class="back-top">BACK TO TOP ↑</a></footer>
-  <script src="app.js"></script>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container footer-inner">
+      <a class="logo" href="#home">
+        <span class="logo-icon">N</span>
+        <span>NEON <span>LABS</span></span>
+      </a>
+
+      <p>© <span id="year"></span> NEON LABS. Crafted with curiosity.</p>
+      <a href="#home">BACK TO TOP ↑</a>
+    </div>
+  </footer>
+
+  <script>
+    // EDIT THESE PROJECTS TO SHOW YOUR REAL APPS
+    const projects = [
+      {
+        title: "Gujarat Job & Yojana",
+        type: "Android",
+        icon: "GJ",
+        description: "A concept for Gujarat government job updates, schemes and scholarship information.",
+        link: "",
+        label: "Explore Project"
+      },
+      {
+        title: "FF Sensi Pro",
+        type: "Gaming",
+        icon: "FF",
+        description: "A gaming-inspired sensitivity settings and profile management app concept.",
+        link: "",
+        label: "Explore Project"
+      },
+      {
+        title: "Silent GMR Like Bot",
+        type: "Utility",
+        icon: "SG",
+        description: "A Telegram bot project interface and utility concept. Add a demo link when ready.",
+        link: "",
+        label: "Explore Project"
+      },
+      {
+        title: "Developer Toolkit",
+        type: "Web",
+        icon: "</>",
+        description: "A collection of useful web experiments and small tools for everyday development.",
+        link: "",
+        label: "Explore Project"
+      }
+    ];
+
+    const projectGrid = document.getElementById("projectGrid");
+    const filterButtons = document.querySelectorAll("[data-filter]");
+
+    function renderProjects(category = "all") {
+      const filtered = category === "all"
+        ? projects
+        : projects.filter(project => project.type === category);
+
+      projectGrid.replaceChildren();
+
+      document.getElementById("projectCount").textContent =
+        String(projects.length).padStart(2, "0");
+
+      filtered.forEach((project, index) => {
+        const card = document.createElement("article");
+        card.className = "project-card";
+        card.style.animationDelay = `${index * 80}ms`;
+
+        const cover = document.createElement("div");
+        cover.className = "project-cover";
+
+        const icon = document.createElement("div");
+        icon.className = "project-icon";
+        icon.textContent = project.icon;
+        cover.appendChild(icon);
+
+        const info = document.createElement("div");
+        info.className = "project-info";
+
+        const type = document.createElement("span");
+        type.className = "project-type";
+        type.textContent = project.type;
+
+        const title = document.createElement("h3");
+        title.textContent = project.title;
+
+        const description = document.createElement("p");
+        description.textContent = project.description;
+
+        info.append(type, title, description);
+
+        if (project.link) {
+          const link = document.createElement("a");
+          link.className = "project-link";
+          link.href = project.link;
+          link.target = "_blank";
+          link.rel = "noopener noreferrer";
+          link.textContent = project.label + " ↗";
+          info.appendChild(link);
+        } else {
+          const placeholder = document.createElement("span");
+          placeholder.className = "project-link";
+          placeholder.textContent = "Demo coming soon";
+          info.appendChild(placeholder);
+        }
+
+        card.append(cover, info);
+        projectGrid.appendChild(card);
+      });
+    }
+
+    filterButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        filterButtons.forEach(item => {
+          item.classList.remove("active");
+          item.setAttribute("aria-pressed", "false");
+        });
+
+        button.classList.add("active");
+        button.setAttribute("aria-pressed", "true");
+        renderProjects(button.dataset.filter);
+      });
+    });
+
+    // MOBILE NAVIGATION
+    const menuBtn = document.getElementById("menuBtn");
+    const nav = document.getElementById("nav");
+
+    menuBtn.addEventListener("click", () => {
+      const isOpen = nav.classList.toggle("open");
+      menuBtn.setAttribute("aria-expanded", String(isOpen));
+      menuBtn.setAttribute(
+        "aria-label",
+        isOpen ? "Close navigation" : "Open navigation"
+      );
+      menuBtn.textContent = isOpen ? "✕" : "☰";
+    });
+
+    nav.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        nav.classList.remove("open");
+        menuBtn.setAttribute("aria-expanded", "false");
+        menuBtn.setAttribute("aria-label", "Open navigation");
+        menuBtn.textContent = "☰";
+      });
+    });
+
+    // SCROLL REVEAL
+    const revealItems = document.querySelectorAll(".reveal");
+
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+
+      revealItems.forEach(item => observer.observe(item));
+    } else {
+      revealItems.forEach(item => item.classList.add("visible"));
+    }
+
+    // CURRENT YEAR
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+
+    // INITIAL PROJECT RENDER
+    renderProjects();
+  </script>
 </body>
 </html>
