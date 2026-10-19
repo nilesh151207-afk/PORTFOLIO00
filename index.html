@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#09090d">
+  <meta name="description" content="Apps, experiments and projects by an independent app developer.">
+  <title>NEON LABS — App Developer Portfolio</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <header class="topbar">
+    <a class="brand" href="#home" aria-label="Home"><span class="brand-mark">N<span>✦</span></span><span id="brandName">NEON LABS</span></a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
+    <nav id="nav">
+      <a href="#projects">Projects</a><a href="#about">About</a><a href="#skills">Skills</a><a href="#contact" class="nav-cta">Contact ↗</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero section" id="home">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="pulse"></span> INDEPENDENT APP DEVELOPER</div>
+        <h1>BUILDING<br>APPS THAT<br><span class="gradient-text">STAND OUT.</span></h1>
+        <p class="hero-description">I turn ideas into useful digital experiences — from mobile apps and gaming tools to practical everyday utilities.</p>
+        <div class="hero-actions"><a class="button primary" href="#projects">Explore my work <span>↘</span></a><a class="button secondary" href="#contact">Let's connect</a></div>
+        <div class="hero-stats"><div><strong id="projectCount">04</strong><span>PROJECTS</span></div><i></i><div><strong>24/7</strong><span>IDEAS IN PROGRESS</span></div><i></i><div><strong>∞</strong><span>ROOM TO BUILD</span></div></div>
+      </div>
+      <div class="hero-art" aria-label="Decorative neon app illustration">
+        <div class="orbit orbit-a"></div><div class="orbit orbit-b"></div>
+        <div class="device"><div class="device-notch"></div><div class="screen-top"><span>MY WORKSPACE</span><span class="tiny-dot"></span></div><div class="screen-title">Ideas into<br><b>reality.</b></div>
+          <div class="app-mini-grid"><div class="mini-app red"><span>✦</span><small>GAMING</small></div><div class="mini-app purple"><span>⌘</span><small>TOOLS</small></div><div class="mini-app orange"><span>◈</span><small>UTILITY</small></div><div class="mini-app green"><span>↗</span><small>WEB</small></div></div>
+          <div class="screen-footer"><span class="tiny-dot"></span> CREATING SOMETHING NEW</div>
+        </div><div class="float-tag tag-left">✦ CREATIVE BUILDER</div><div class="float-tag tag-right">APP / WEB / IDEAS</div>
+      </div>
+    </section>
+
+    <section class="section projects-section" id="projects">
+      <div class="section-heading"><div><div class="eyebrow">SELECTED WORK</div><h2>Projects<span class="red-dot">.</span></h2></div><p>A growing collection of apps, experiments and useful tools.</p></div>
+      <div class="filters" id="filters">
+        <button class="filter active" data-filter="all">All projects</button><button class="filter" data-filter="Android">Android</button><button class="filter" data-filter="Gaming">Gaming</button><button class="filter" data-filter="Utility">Utility</button><button class="filter" data-filter="Web">Web</button>
+      </div>
+      <div class="project-grid" id="projectGrid"></div>
+      <p class="edit-hint">Tip: edit <code>projects</code> in <code>app.js</code> to add your own apps and real download links.</p>
+    </section>
+
+    <section class="section about-section" id="about">
+      <div class="about-visual"><div class="about-card"><div class="about-symbol">N<span>✦</span></div><div class="scan-line"></div><div class="about-caption">CURIOSITY → CREATION</div></div></div>
+      <div class="about-copy"><div class="eyebrow">A LITTLE ABOUT ME</div><h2>Curious mind.<br><span class="gradient-text">Builder mindset.</span></h2><p>I enjoy exploring ideas, designing interfaces and building apps that solve real problems or make digital life more fun. This portfolio is my home for sharing what I create and what I learn along the way.</p><p class="muted">Replace this paragraph with your own story, experience and goals.</p><a class="text-link" href="#contact">Have an idea? Let's talk <span>↗</span></a></div>
+    </section>
+
+    <section class="section skills-section" id="skills">
+      <div class="section-heading"><div><div class="eyebrow">MY TOOLKIT</div><h2>Skills & focus<span class="red-dot">.</span></h2></div><p>Update these tags to match the tools and technologies you actually use.</p></div>
+      <div class="skill-list"><span>Android apps</span><span>HTML & CSS</span><span>JavaScript</span><span>UI / UX design</span><span>Python</span><span>Firebase</span><span>API integration</span><span>Responsive web</span></div>
+    </section>
+
+    <section class="section contact-section" id="contact">
+      <div class="contact-box"><div class="eyebrow">HAVE A PROJECT IN MIND?</div><h2>Let's make<br><span class="gradient-text">something awesome.</span></h2><p>For collaborations, feedback or just to connect, reach out using the links below.</p><div class="contact-links" id="contactLinks"></div><span class="contact-note">Add your real contact links in <code>app.js</code> before publishing.</span></div>
+    </section>
+  </main>
+  <footer><a class="brand" href="#home"><span class="brand-mark">N<span>✦</span></span><span id="footerBrand">NEON LABS</span></a><span>© <span id="year"></span> <span id="footerName">NEON LABS</span>. Built with curiosity.</span><a href="#home" class="back-top">BACK TO TOP ↑</a></footer>
+  <script src="app.js"></script>
+</body>
+</html>

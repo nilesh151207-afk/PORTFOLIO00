@@ -1,0 +1,10 @@
+{
+  "name": "Neon Labs Developer Portfolio",
+  "short_name": "Neon Portfolio",
+  "description": "App developer portfolio",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#09090d",
+  "theme_color": "#09090d",
+  "icons": []
+}
